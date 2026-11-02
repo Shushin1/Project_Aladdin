@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "ACG_Lab4\\x64\\Debug\\main.obj",
+            "outputs": [
+                "ACG_Lab4\\x64\\Debug\\main.cpp.obj.dt.module.json",
+                "ACG_Lab4\\x64\\Debug\\main.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
