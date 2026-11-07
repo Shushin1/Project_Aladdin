@@ -22,9 +22,13 @@ const int width = 1024, height = 1024;
 
 float carpetX = -0.7f;
 float carpetY = -0.7f;
+float carpet_speed = 1.5f;
 
 float moveX = 0.0f;
 float moveY = 0.0f;
+
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
 //Handling cursor position
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -39,7 +43,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 
 	if (key == GLFW_KEY_W) {
-		if(action == GLFW_PRESS) moveY = 0.0005f;
+		if(action == GLFW_PRESS) moveY = carpet_speed*deltaTime;
 		else if (action == GLFW_RELEASE)
 		{
 			moveY = 0.0f;
@@ -47,7 +51,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 
 	if (key == GLFW_KEY_S) {
-		if (action == GLFW_PRESS) moveY = -0.0005f;
+		if (action == GLFW_PRESS) moveY = -carpet_speed*deltaTime;
 		else if(action == GLFW_RELEASE)
 		{
 			moveY = 0.0f;
@@ -175,6 +179,10 @@ int main(void)
 	// Check if the window was closed
 	while (!glfwWindowShouldClose(window))
 	{
+
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 		// Swap buffers
 		glfwSwapBuffers(window);
 
