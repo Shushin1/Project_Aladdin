@@ -214,7 +214,18 @@
             "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\gtc\\constants.inl",
             "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\gtc\\quaternion.inl",
             "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\gtc\\type_ptr.inl",
-            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\shader.hpp"
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\shader.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\globals.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\player.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\game_object.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\mesh.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\glm.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\core\\_fixes.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\glm.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glm\\core\\_fixes.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\carpet.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\lamp.hpp",
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\mesh_data.hpp"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
