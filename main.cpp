@@ -15,6 +15,17 @@
 #include "dependente\glm\gtc\type_ptr.hpp"
 
 #include "shader.hpp"
+<<<<<<< Updated upstream
+=======
+#include "globals.hpp"
+
+#include "assets/player.hpp"
+#include "assets/lamp.hpp"
+#include "assets/mesh_data.hpp"
+
+
+const int width = 1024, height = 1024;
+>>>>>>> Stashed changes
 
 //variables
 GLFWwindow* window;
@@ -114,6 +125,7 @@ int main(void)
 	// as vrea sa le bagam in clase (putem incerca sa facem o clasa generica Object care sa contina pozitiile X, Y si dupa sa le dam extend specific
 	// gen clasa Carpet, Player, Lamp, Enemy)
 
+<<<<<<< Updated upstream
 	GLfloat carpet_vertices[] = {
 		0.05f,  0.05f, 0.0f,  // top right
 		0.05f, -0.05f, 0.0f,  // bottom right
@@ -187,6 +199,17 @@ int main(void)
 
 
 	//CARPET
+=======
+	 //din motive sa nu fie cpp cancer, daca nu vrem sa fim pe cpp17 or newer(suntem pe 14), trb ca meshu sa fie declarat in main
+        
+	Mesh carpetMesh(carpet_vertices, sizeof(carpet_vertices), carpet_indices, sizeof(carpet_indices) / sizeof(GLuint));
+	Mesh playerMesh(player_vertices, sizeof(player_vertices),player_indices, sizeof(player_indices) / sizeof(GLuint));
+	Mesh lampMesh(lamp_vertices, sizeof(lamp_vertices), lamp_indices, sizeof(lamp_indices) / sizeof(GLuint));
+
+	Carpet carpet(carpetMesh, glm::vec3(-0.7, -0.7, 0));
+	Player player(playerMesh, &lampMesh ,&carpet);
+
+>>>>>>> Stashed changes
 
 
 	// A Vertex Array Object (VAO) is an object which contains one or more Vertex Buffer Objects and is designed to store the information for a complete rendered object. 
