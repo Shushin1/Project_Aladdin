@@ -1,0 +1,16 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\assets\\mesh_data.h",
+        "ProvidedModule": "",
+        "Includes": [
+            "d:\\facultate\\anul iii\\graphics\\project\\project_aladdin\\dependente\\glew\\glew.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\um\\gl\\glu.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\shared\\winapifamily.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\shared\\winpackagefamily.h",
+            "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\um\\gl\\gl.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

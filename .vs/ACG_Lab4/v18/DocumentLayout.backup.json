@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\player.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:assets\\player.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\mesh_data.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:assets\\mesh_data.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\game_object.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:assets\\game_object.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\lamp.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:assets\\lamp.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\carpet.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:assets\\carpet.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\mesh.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}|lab_TGIP_1.vcxproj|solutionrelative:assets\\mesh.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +38,98 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAACMBAAAAAAAAAAAAADABAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAAAG8AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-11-02T14:26:14.23Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "player.hpp",
+              "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\player.hpp",
+              "RelativeDocumentMoniker": "assets\\player.hpp",
+              "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\player.hpp*",
+              "RelativeToolTip": "assets\\player.hpp*",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAiwGIAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-08T12:35:54.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "game_object.hpp",
+              "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\game_object.hpp",
+              "RelativeDocumentMoniker": "assets\\game_object.hpp",
+              "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\game_object.hpp",
+              "RelativeToolTip": "assets\\game_object.hpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-08T14:02:23.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "carpet.hpp",
+              "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\carpet.hpp",
+              "RelativeDocumentMoniker": "assets\\carpet.hpp",
+              "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\carpet.hpp",
+              "RelativeToolTip": "assets\\carpet.hpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAASwB4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-08T12:35:51.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "mesh_data.hpp",
+              "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\mesh_data.hpp",
+              "RelativeDocumentMoniker": "assets\\mesh_data.hpp",
+              "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\mesh_data.hpp",
+              "RelativeToolTip": "assets\\mesh_data.hpp",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAAEgAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-08T12:35:54.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "mesh.hpp",
+              "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\mesh.hpp",
+              "RelativeDocumentMoniker": "assets\\mesh.hpp",
+              "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\mesh.hpp",
+              "RelativeToolTip": "assets\\mesh.hpp",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-08T12:35:53.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "lamp.hpp",
+              "DocumentMoniker": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\lamp.hpp",
+              "RelativeDocumentMoniker": "assets\\lamp.hpp",
+              "ToolTip": "D:\\Facultate\\Anul III\\Graphics\\PROJECT\\Project_Aladdin\\assets\\lamp.hpp",
+              "RelativeToolTip": "assets\\lamp.hpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-11-08T12:35:53.029Z",
               "EditorCaption": ""
             }
           ]

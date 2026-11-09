@@ -4,7 +4,7 @@
 // The position variable has attribute position 0
 layout(location = 0) in vec3 vertexPos; 
 
-// Add uniform variable for the transform matrix
+// Add uniform variable for the transform matrix 
 uniform mat4 transform;
 
 void main(){

@@ -1,4 +1,5 @@
 #pragma once
 #include "dependente/glfw/glfw3.h"
-//ca sa apara peste tot
-extern GLFWwindow* window;
+
+GLFWwindow* window;
+const int width = 1024, height = 1024;
