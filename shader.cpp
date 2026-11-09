@@ -9,7 +9,7 @@ using namespace std;
 #include <stdlib.h>
 #include <string.h>
 
-#include "dependente\glew\glew.h"
+#include "dependente/glew/glew.h"
 
 #include "shader.hpp"
 
