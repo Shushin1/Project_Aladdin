@@ -4,15 +4,15 @@
 #include <iostream>
 
 // Include GLEW
-#include "dependente\glew\glew.h"
+#include "dependente/glew/glew.h"
 
 // Include GLFW
-#include "dependente\glfw\glfw3.h"
+#include "dependente/glfw/glfw3.h"
 
 // Include GLM
-#include "dependente\glm\glm.hpp"
-#include "dependente\glm\gtc\matrix_transform.hpp"
-#include "dependente\glm\gtc\type_ptr.hpp"
+#include "dependente/glm/glm.hpp"
+#include "dependente/glm/gtc/matrix_transform.hpp"
+#include "dependente/glm/gtc/type_ptr.hpp"
 
 #include "shader.hpp"
 #include "globals.hpp"
