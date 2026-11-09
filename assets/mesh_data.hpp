@@ -89,3 +89,18 @@ GLuint lamp_indices[] = {
 	0, 3, 4,  // Bottom-Left triangle
 	0, 4, 1   // Top-Left triangle
 };
+
+
+//ENEMY PLACEHOLDER
+GLfloat enemy_vertices[] = {
+	-0.30f,  0.00f, 0.0f,
+	 0.15f,  0.25f, 0.0f,
+	 0.15f, -0.25f, 0.0f
+};
+
+GLuint enemy_indices[] = {
+	0, 1, 2,  //only one triangle
+};
+
+
+

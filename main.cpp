@@ -20,6 +20,7 @@
 #include "assets/player.hpp"
 #include "assets/lamp.hpp"
 #include "assets/mesh_data.hpp"
+#include "assets/enemy.hpp"
 
 //variables
 
@@ -91,9 +92,11 @@ int main(void)
 	Mesh carpetMesh(carpet_vertices, sizeof(carpet_vertices), carpet_indices, sizeof(carpet_indices) / sizeof(GLuint));
 	Mesh playerMesh(player_vertices, sizeof(player_vertices),player_indices, sizeof(player_indices) / sizeof(GLuint));
 	Mesh lampMesh(lamp_vertices, sizeof(lamp_vertices), lamp_indices, sizeof(lamp_indices) / sizeof(GLuint));
+	Mesh enemyMesh(enemy_vertices, sizeof(enemy_vertices), enemy_indices, sizeof(enemy_indices) / sizeof(GLuint));
 
 	Carpet carpet(carpetMesh, glm::vec3(-0.7, -0.7, 0));
 	Player player(playerMesh, &lampMesh ,&carpet);
+	Enemy enemy(enemyMesh, glm::vec3(0.0, 0.0, 0.0f));
 
 	// Set a callback for handling mouse cursor position
 	// Decomment for a callback example
@@ -112,7 +115,7 @@ int main(void)
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		
+
 
 		// Swap buffers
 		glfwSwapBuffers(window);
@@ -123,6 +126,8 @@ int main(void)
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT);
 
+
+		
 		// Use our shader
 		glUseProgram(programID);
 
@@ -131,6 +136,14 @@ int main(void)
 
 		carpet.draw(programID);
 		player.draw(programID);
+		if (!enemy.isDead())
+			enemy.draw(programID);
+		if(player.getCurrentLamp() != NULL)
+			if(player.getCurrentLamp()->isColliding(enemy) && !enemy.isDead()) {
+				player.removeCurrentLamp();
+				enemy.kill();
+			}
+		
 	}
 
 

@@ -106,6 +106,16 @@ class Player : public GameObject {
                 activeLamp->draw(programID);
             }
         }
+
+        Lamp* getCurrentLamp() {
+            return activeLamp;
+        }
+
+        void removeCurrentLamp() {
+            delete activeLamp;
+            activeLamp = NULL;
+            armAngle = 0.0f;
+        }
     private:
         Carpet* carpet;
         Mesh* lamp;
