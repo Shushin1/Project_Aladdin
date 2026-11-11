@@ -36,7 +36,7 @@ class Player : public GameObject {
                     armAngle = 0.0f;
                 }
 
-                if (lampTimer >= 1.0f) {
+                if (lampTimer >= 1.5f) {
                     delete activeLamp;
                     activeLamp = NULL;
                     armAngle = 0.0f;
@@ -45,9 +45,17 @@ class Player : public GameObject {
         }
 
         void attack() {
-            activeLamp = new Lamp(*lamp, glm::vec3(position.x + 0.15f, position.y, 0.0f));
-            lampTimer = 0.0f;
-            armAngle = 45.0f;
+            if (!activeLamp) {
+                activeLamp = new Lamp(*lamp, glm::vec3(position.x + 0.15f, position.y, 0.0f));
+                lampTimer = 0.0f;
+                armAngle = 45.0f;
+                ma_engine_play_sound(&audioEngine, "assets/audio/throw.wav", NULL);
+            }
+        }
+
+        void die() {
+            angle = 90.0f;
+            ma_engine_play_sound(&audioEngine, "assets/audio/gameover.wav", NULL);
         }
 
         void draw(GLuint programID) {
@@ -56,6 +64,7 @@ class Player : public GameObject {
 
             glm::mat4 matrix = glm::mat4(1.0f);
             matrix = glm::translate(matrix, position);
+            matrix = glm::rotate(matrix, angle, glm::vec3(0.0f, 0.0f, 1.0f));
             matrix = glm::scale(matrix, scale);
 
             unsigned int transformLoc = glGetUniformLocation(programID, "transform");

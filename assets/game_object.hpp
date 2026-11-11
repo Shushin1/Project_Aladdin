@@ -49,6 +49,9 @@ class GameObject {
 		    unsigned int transformLoc2 = glGetUniformLocation(programID, "color");
 		    glUniform4fv(transformLoc2, 1, glm::value_ptr(color));
 
+            unsigned int transformLoc3 = glGetUniformLocation(programID, "useGradient");
+            glUniform1i(transformLoc3, useGradient);
+
             targetMesh->draw();
         }
 
@@ -59,10 +62,16 @@ class GameObject {
             return collision_radius * max_scale;
         }
 
+        glm::vec3 getPosition() const{
+            return position;
+        }
+
         bool isColliding(const GameObject& other) const {
             if (getRadius() == 0.0f || other.getRadius() == 0.0f) return false;
             return glm::distance(position, other.position) <= getRadius() + other.getRadius();
         }
+
+
     protected: //ca sa le vada subclasele
         const Mesh *targetMesh;
         glm::vec4 color;
@@ -70,4 +79,5 @@ class GameObject {
         glm::vec3 scale;
         GLfloat angle;
         GLfloat collision_radius = 0;
+        int useGradient = 0;
 };

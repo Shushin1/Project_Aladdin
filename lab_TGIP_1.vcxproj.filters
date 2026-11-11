@@ -11,5 +11,6 @@
   <ItemGroup>
     <ClInclude Include="assets\mesh_data.hpp" />
     <ClInclude Include="assets\lamp.hpp" />
+    <ClInclude Include="dependente\miniaudio.h" />
   </ItemGroup>
 </Project>

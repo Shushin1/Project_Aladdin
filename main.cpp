@@ -1,4 +1,6 @@
 // Include standard headers
+#define MINIAUDIO_IMPLEMENTATION
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -22,6 +24,7 @@
 #include "assets/lamp.hpp"
 #include "assets/mesh_data.hpp"
 #include "assets/enemy.hpp"
+
 
 //variables
 
@@ -85,6 +88,16 @@ int main(void)
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	if (ma_engine_init(NULL, &audioEngine) != MA_SUCCESS) {
+		printf("Failed to initialize audio engine.");
+		return -1;
+	}
+
+	ma_sound bgMusic;
+	ma_sound_init_from_file(&audioEngine, "assets/audio/background.mp3", 0, NULL, NULL, &bgMusic);
+	ma_sound_set_looping(&bgMusic, MA_TRUE); // Bonus: This makes the music loop endlessly!
+	ma_sound_start(&bgMusic);
+
 
 	// Create and compile our GLSL program from the shaders
 	GLuint programID = LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader");
@@ -93,11 +106,52 @@ int main(void)
 	Mesh carpetMesh(carpet_vertices, sizeof(carpet_vertices), carpet_indices, sizeof(carpet_indices) / sizeof(GLuint));
 	Mesh playerMesh(player_vertices, sizeof(player_vertices),player_indices, sizeof(player_indices) / sizeof(GLuint));
 	Mesh lampMesh(lamp_vertices, sizeof(lamp_vertices), lamp_indices, sizeof(lamp_indices) / sizeof(GLuint));
-	Mesh enemyMesh(enemy_vertices, sizeof(enemy_vertices), enemy_indices, sizeof(enemy_indices) / sizeof(GLuint));
+	Mesh enemy1Mesh(enemy1_vertices, sizeof(enemy1_vertices), enemy1_indices, sizeof(enemy1_indices) / sizeof(GLuint));
+	Mesh enemy2Mesh(enemy2_vertices, sizeof(enemy2_vertices), enemy2_indices, sizeof(enemy2_indices) / sizeof(GLuint));
 
-	Carpet carpet(carpetMesh, glm::vec3(-0.7, -0.7, 0));
-	Player player(playerMesh, &lampMesh ,&carpet);
-	Enemy enemy(enemyMesh, glm::vec3(0.0, 0.0, 0.0f));
+	Carpet carpet(carpetMesh, glm::vec3(-2.5f, -0.3f, 0.0f));
+	Player player(playerMesh, &lampMesh, &carpet);
+
+
+	glm::vec3 positions[] = {
+		glm::vec3(2.0f,  0.0f, 0.0f),  // [0] Front Center
+
+		glm::vec3(1.2f,  0.0f, 0.0f),  // [1] Front Center
+		glm::vec3(1.6f,  0.4f, 0.0f),  // [2] Behind Up
+		glm::vec3(1.6f, -0.4f, 0.0f),  // [3] Behind Down
+
+		glm::vec3(1.2f,  0.0f, 0.0f),  // [4] Front Center
+		glm::vec3(1.6f,  0.3f, 0.0f),  // [5] Middle Up
+		glm::vec3(1.6f, -0.3f, 0.0f),  // [6] Middle Down
+		glm::vec3(2.0f,  0.6f, 0.0f),  // [7] Back Top
+		glm::vec3(2.0f,  0.0f, 0.0f),  // [8] Back Center (Fills the gap!)
+		glm::vec3(2.0f, -0.6f, 0.0f)   // [9] Back Bottom
+	};
+
+	Enemy* enemies[10];
+
+	for (int i = 0;i < 10;i++) {
+		int mesh = rand() % 2;
+
+		switch (mesh) {
+		case 0:
+			enemies[i] = new Enemy(enemy1Mesh, positions[i]);
+			break;
+		case 1:
+			enemies[i] = new Enemy(enemy2Mesh, positions[i]);
+			break;
+		}
+	}
+
+	int waves[] = { 1,3,6 };
+	int maxWaves = sizeof(waves) / sizeof(waves[0]);
+
+	int start = 0;
+	int activeWave = 0;
+	int kills = 0;
+
+	bool gameOver = 0;
+
 
 	// Set a callback for handling mouse cursor position
 	// Decomment for a callback example
@@ -132,26 +186,57 @@ int main(void)
 		// Use our shader
 		glUseProgram(programID);
 
-		carpet.update(deltaTime);
-		player.update(deltaTime);
+		if (!gameOver) {
+			carpet.update(deltaTime);
+			player.update(deltaTime);
+		}
+
 
 		carpet.draw(programID);
 		player.draw(programID);
-		if (!enemy.isDead())
-			enemy.draw(programID);
-		if(player.getCurrentLamp() != NULL)
-			if(player.getCurrentLamp()->isColliding(enemy) && !enemy.isDead()) {
-				player.removeCurrentLamp();
-				enemy.kill();
+
+
+
+		if (activeWave < maxWaves && !gameOver) {
+			int end = start + waves[activeWave];
+
+			for (int i=start;i < end;i++) {
+				if (!enemies[i]->isDead()) {
+					enemies[i]->lookAt(player.getPosition());
+					enemies[i]->update(deltaTime);
+					enemies[i]->draw(programID);
+				}
+				if (player.getCurrentLamp() != NULL)
+					if (player.getCurrentLamp()->isColliding(*enemies[i]) && !enemies[i]->isDead()) {
+						player.removeCurrentLamp();
+						enemies[i]->damage(1);
+						if (enemies[i]->isDead()) kills++;
+					}
+
+				if (enemies[i]->getPosition().x <= player.getPosition().x) {
+					gameOver = 1;
+					ma_sound_stop(&bgMusic);
+					player.die();
+				}
 			}
-		
-	}
+			}
+
+			if (kills == waves[activeWave]) {
+				start += waves[activeWave];
+				activeWave++;
+				kills = 0;
+			}
+
+			
+		}
 
 
 	glDeleteProgram(programID);
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
+
+	ma_engine_uninit(&audioEngine);
 
 	return 0;
 }

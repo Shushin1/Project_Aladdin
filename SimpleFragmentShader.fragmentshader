@@ -1,14 +1,23 @@
 #version 330 core
 
+in float localY; 
 uniform vec4 color;
 
-// Output data
-out vec4 fragCol;
+uniform int useGradient; 
 
+out vec4 fragCol;
 
 void main()
 {
-	// Output color from main
-	fragCol = color;
-
+    if (useGradient == 1) {
+        vec4 bottomColor = vec4(color.rgb * 0.2, 1.0);
+        
+        // MULTIPLY by a number like 3.0 to make it steep. (Higher = steeper)
+        // CLAMP locks the result between 0.0 and 1.0 so colors don't glitch.
+        float gradientFactor = clamp((localY * 3.0) + 0.5, 0.0, 1.0); 
+        
+        fragCol = mix(bottomColor, color, gradientFactor);
+    } else {
+        fragCol = color;
+    }
 }
