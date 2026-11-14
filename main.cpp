@@ -206,12 +206,17 @@ int main(void)
 					enemies[i]->update(deltaTime);
 					enemies[i]->draw(programID);
 				}
-				if (player.getCurrentLamp() != NULL)
-					if (player.getCurrentLamp()->isColliding(*enemies[i]) && !enemies[i]->isDead()) {
-						player.removeCurrentLamp();
-						enemies[i]->damage(1);
-						if (enemies[i]->isDead()) kills++;
-					}
+
+				for (int j = 0;j < player.maxLamps;j++) {
+					if (player.getLamp(j) != NULL) {
+						if (player.getLamp(j)->isColliding(*enemies[i]) && !enemies[i]->isDead()) {
+							player.removeLamp(j);
+							enemies[i]->damage(1);
+							if (enemies[i]->isDead()) kills++;
+						}
+					}	
+				}
+				
 
 				if (enemies[i]->getPosition().x <= player.getPosition().x) {
 					gameOver = 1;

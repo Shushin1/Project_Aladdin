@@ -8,7 +8,7 @@ public:
     Enemy(const Mesh& mesh, glm::vec3 startPosition)
         : GameObject(mesh, startPosition, glm::vec3(0.8f), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f))
     {
-        collision_radius = 0.2f;
+        collision_radius = 0.25f;
         useGradient = 1;
         //random speed! rand da un nr intre 0 si rand_max, impartim sa fie intre 0 si 1, apoi inmultesti cu range si adaugi minimu
         GLfloat min = 0.15;
