@@ -1,7 +1,10 @@
 // Include standard headers
+#define MINIAUDIO_IMPLEMENTATION
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+
 
 // Include GLEW
 #include "dependente/glew/glew.h"
@@ -20,6 +23,8 @@
 #include "assets/player.hpp"
 #include "assets/lamp.hpp"
 #include "assets/mesh_data.hpp"
+#include "assets/enemy.hpp"
+
 
 //variables
 
@@ -34,7 +39,7 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 
 
 // in callbackul asta ma gandeam sa gestionam toate key eventurile, desi poate ar merge mutate in clase actiunile
-// o sa las mai jos un exemplu la ce ma refer, la tasta W
+// o sa las mai jos un exemplu la ce ma refer, la tasta ESC
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -84,6 +89,18 @@ int main(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 
+	//condfigurari pentru sound engine
+	if (ma_engine_init(NULL, &audioEngine) != MA_SUCCESS) {
+		printf("Failed to initialize audio engine.");
+		return -1;
+	}
+
+	ma_sound bgMusic;
+	ma_sound_init_from_file(&audioEngine, "assets/audio/background.mp3", 0, NULL, NULL, &bgMusic);
+	ma_sound_set_looping(&bgMusic, MA_TRUE);
+	ma_sound_start(&bgMusic);
+
+
 	// Create and compile our GLSL program from the shaders
 	GLuint programID = LoadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader");
 
@@ -91,13 +108,51 @@ int main(void)
 	Mesh carpetMesh(carpet_vertices, sizeof(carpet_vertices), carpet_indices, sizeof(carpet_indices) / sizeof(GLuint));
 	Mesh playerMesh(player_vertices, sizeof(player_vertices),player_indices, sizeof(player_indices) / sizeof(GLuint));
 	Mesh lampMesh(lamp_vertices, sizeof(lamp_vertices), lamp_indices, sizeof(lamp_indices) / sizeof(GLuint));
+	Mesh enemy1Mesh(enemy1_vertices, sizeof(enemy1_vertices), enemy1_indices, sizeof(enemy1_indices) / sizeof(GLuint));
+	Mesh enemy2Mesh(enemy2_vertices, sizeof(enemy2_vertices), enemy2_indices, sizeof(enemy2_indices) / sizeof(GLuint));
 
-	Carpet carpet(carpetMesh, glm::vec3(-0.7, -0.7, 0));
-	Player player(playerMesh, &lampMesh ,&carpet);
+	Carpet carpet(carpetMesh, glm::vec3(-2.5f, -0.3f, 0.0f));
+	Player player(playerMesh, &lampMesh, &carpet);
 
-	// Set a callback for handling mouse cursor position
-	// Decomment for a callback example
-	// glfwSetCursorPosCallback(window, cursor_position_callback);
+
+	glm::vec3 positions[] = {
+		glm::vec3(2.0f,  0.0f, 0.0f),  // [0] Front Center
+
+		glm::vec3(1.2f,  0.0f, 0.0f),  // [1] Front Center
+		glm::vec3(1.6f,  0.4f, 0.0f),  // [2] Behind Up
+		glm::vec3(1.6f, -0.4f, 0.0f),  // [3] Behind Down
+
+		glm::vec3(1.2f,  0.0f, 0.0f),  // [4] Front Center
+		glm::vec3(1.6f,  0.3f, 0.0f),  // [5] Middle Up
+		glm::vec3(1.6f, -0.3f, 0.0f),  // [6] Middle Down
+		glm::vec3(2.0f,  0.6f, 0.0f),  // [7] Back Top
+		glm::vec3(2.0f,  0.0f, 0.0f),  // [8] Back Center
+		glm::vec3(2.0f, -0.6f, 0.0f)   // [9] Back Bottom
+	};
+
+	Enemy* enemies[10];
+
+	for (int i = 0;i < 10;i++) {
+		int mesh = rand() % 2;
+
+		switch (mesh) {
+		case 0:
+			enemies[i] = new Enemy(enemy1Mesh, positions[i]);
+			break;
+		case 1:
+			enemies[i] = new Enemy(enemy2Mesh, positions[i]);
+			break;
+		}
+	}
+
+	int waves[] = { 1,3,6 };
+	int maxWaves = sizeof(waves) / sizeof(waves[0]);
+
+	int start = 0;
+	int activeWave = 0;
+	int kills = 0;
+
+	bool gameOver = 0;
 
 	//Ex4 - Set callback for window resizing
 	glfwSetFramebufferSizeCallback(window, window_callback);
@@ -112,7 +167,7 @@ int main(void)
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		
+
 
 		// Swap buffers
 		glfwSwapBuffers(window);
@@ -123,21 +178,90 @@ int main(void)
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT);
 
+
+		
 		// Use our shader
 		glUseProgram(programID);
 
-		carpet.update(deltaTime);
-		player.update(deltaTime);
+
+		//dam freeze la joc daca pierzu
+		if (!gameOver) {
+			carpet.update(deltaTime);
+			player.update(deltaTime);
+		}
+
 
 		carpet.draw(programID);
 		player.draw(programID);
-	}
+
+
+		//dam restart la waveuri daca vrea playerul, doar dupa ce a eliminat toti inamicii intai
+		if (activeWave >= maxWaves) {
+			if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+				activeWave = 0;
+				start = 0;
+				kills = 0;
+
+				//resetam si inamicii, ca au isDead == true si nu o sa "respawneze"
+				for (int i = 0; i < 10; i++) {
+					delete enemies[i];
+
+					int mesh = rand() % 2;
+					if (mesh == 0) {
+						enemies[i] = new Enemy(enemy1Mesh, positions[i]);
+					}
+					else {
+						enemies[i] = new Enemy(enemy2Mesh, positions[i]);
+					}
+				};
+			}
+		}
+
+		if (activeWave < maxWaves && !gameOver) {
+			int end = start + waves[activeWave];
+
+			for (int i=start;i < end;i++) {
+				if (!enemies[i]->isDead()) {
+					enemies[i]->lookAt(player.getPosition());
+					enemies[i]->update(deltaTime);
+					enemies[i]->draw(programID);
+				}
+
+				for (int j = 0;j < player.maxLamps;j++) {
+					if (player.getLamp(j) != NULL) {
+						if (player.getLamp(j)->isColliding(*enemies[i]) && !enemies[i]->isDead()) {
+							player.removeLamp(j);
+							enemies[i]->damage(1);
+							if (enemies[i]->isDead()) kills++;
+						}
+					}	
+				}
+				
+
+				if (enemies[i]->getPosition().x <= player.getPosition().x) {
+					gameOver = 1;
+					ma_sound_stop(&bgMusic);
+					player.die();
+				}
+			}
+			}
+
+			if (kills == waves[activeWave]) {
+				start += waves[activeWave];
+				activeWave++;
+				kills = 0;
+			}
+
+			
+		}
 
 
 	glDeleteProgram(programID);
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
+
+	ma_engine_uninit(&audioEngine);
 
 	return 0;
 }

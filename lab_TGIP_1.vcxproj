@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="assets\lamp.hpp" />
     <ClInclude Include="assets\mesh_data.hpp" />
+    <ClInclude Include="dependente\miniaudio.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E8D7D48F-7AB1-4260-BCEC-8CC11D9FBC01}</ProjectGuid>
