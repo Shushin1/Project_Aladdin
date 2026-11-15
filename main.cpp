@@ -39,7 +39,7 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 
 
 // in callbackul asta ma gandeam sa gestionam toate key eventurile, desi poate ar merge mutate in clase actiunile
-// o sa las mai jos un exemplu la ce ma refer, la tasta W
+// o sa las mai jos un exemplu la ce ma refer, la tasta ESC
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -88,6 +88,8 @@ int main(void)
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+
+	//condfigurari pentru sound engine
 	if (ma_engine_init(NULL, &audioEngine) != MA_SUCCESS) {
 		printf("Failed to initialize audio engine.");
 		return -1;
@@ -95,7 +97,7 @@ int main(void)
 
 	ma_sound bgMusic;
 	ma_sound_init_from_file(&audioEngine, "assets/audio/background.mp3", 0, NULL, NULL, &bgMusic);
-	ma_sound_set_looping(&bgMusic, MA_TRUE); // Bonus: This makes the music loop endlessly!
+	ma_sound_set_looping(&bgMusic, MA_TRUE);
 	ma_sound_start(&bgMusic);
 
 
@@ -124,7 +126,7 @@ int main(void)
 		glm::vec3(1.6f,  0.3f, 0.0f),  // [5] Middle Up
 		glm::vec3(1.6f, -0.3f, 0.0f),  // [6] Middle Down
 		glm::vec3(2.0f,  0.6f, 0.0f),  // [7] Back Top
-		glm::vec3(2.0f,  0.0f, 0.0f),  // [8] Back Center (Fills the gap!)
+		glm::vec3(2.0f,  0.0f, 0.0f),  // [8] Back Center
 		glm::vec3(2.0f, -0.6f, 0.0f)   // [9] Back Bottom
 	};
 
@@ -151,11 +153,6 @@ int main(void)
 	int kills = 0;
 
 	bool gameOver = 0;
-
-
-	// Set a callback for handling mouse cursor position
-	// Decomment for a callback example
-	// glfwSetCursorPosCallback(window, cursor_position_callback);
 
 	//Ex4 - Set callback for window resizing
 	glfwSetFramebufferSizeCallback(window, window_callback);
@@ -186,6 +183,8 @@ int main(void)
 		// Use our shader
 		glUseProgram(programID);
 
+
+		//dam freeze la joc daca pierzu
 		if (!gameOver) {
 			carpet.update(deltaTime);
 			player.update(deltaTime);
@@ -196,6 +195,27 @@ int main(void)
 		player.draw(programID);
 
 
+		//dam restart la waveuri daca vrea playerul, doar dupa ce a eliminat toti inamicii intai
+		if (activeWave >= maxWaves) {
+			if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+				activeWave = 0;
+				start = 0;
+				kills = 0;
+
+				//resetam si inamicii, ca au isDead == true si nu o sa "respawneze"
+				for (int i = 0; i < 10; i++) {
+					delete enemies[i];
+
+					int mesh = rand() % 2;
+					if (mesh == 0) {
+						enemies[i] = new Enemy(enemy1Mesh, positions[i]);
+					}
+					else {
+						enemies[i] = new Enemy(enemy2Mesh, positions[i]);
+					}
+				};
+			}
+		}
 
 		if (activeWave < maxWaves && !gameOver) {
 			int end = start + waves[activeWave];

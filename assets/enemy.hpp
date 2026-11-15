@@ -60,7 +60,7 @@ private:
     int hp = 3;
     bool dead = false;
     GLfloat moveSpeed = 0.25f;
-    GLfloat rotationSpeed = 120.0f; // Radians per second
+    GLfloat rotationSpeed = 120.0f;
     glm::vec4 colors[3] = {
         glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
         glm::vec4(1.0f, 1.0f, 0.0f, 1.0f),

@@ -115,7 +115,7 @@ class Player : public GameObject {
             glUniform4fv(transformLoc2, 1, glm::value_ptr(glm::vec4(0.9f, 0.9f, 0.9f, 1.0f))); // White
             targetMesh->drawPartial(3, 33);
 
-            // animare separat mana dreapta
+            // animare si colorare separat mana dreapta
             glm::mat4 armMat = matrix;
 
             armMat = glm::translate(armMat, glm::vec3(0.15f, 0.15f, 0.0f));
@@ -149,7 +149,5 @@ class Player : public GameObject {
         Lamp* activeLamps[maxLamps];
         float lampTimers[maxLamps];
         float attackCooldown;
-        float armAngle;
-
-        
+        float armAngle;      
 };

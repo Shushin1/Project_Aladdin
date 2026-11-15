@@ -84,16 +84,16 @@ GLfloat lamp_vertices[] = {
 	-0.06f,  0.00f, 0.0f,  // 4: Left
 
 	// ---------------- DETAILS ------------------
-	 0.14f,  0.04f, 0.0f,  // 5: Spout tip (Sweeps up-right)
-	-0.10f,  0.02f, 0.0f,  // 6: Handle (Sweeps left)
-	-0.03f, -0.08f, 0.0f,  // 7: Base flat left
-	 0.03f, -0.08f, 0.0f   // 8: Base flat right
+	 0.14f,  0.04f, 0.0f,  // 5: Tip 
+	-0.10f,  0.02f, 0.0f,  // 6: Handle
+	-0.03f, -0.08f, 0.0f,  // 7: Base left
+	 0.03f, -0.08f, 0.0f   // 8: Base right
 };
 
 GLuint lamp_indices[] = {
 	0, 1, 2,   0, 2, 3,   0, 3, 4,   0, 4, 1, // Diamond Body (4 triangles)
-	2, 1, 5,                                  // Spout (Connects right side to tip)
-	4, 1, 6,                                  // Handle (Connects left side to handle)
+	2, 1, 5,                                  // Tip
+	4, 1, 6,                                  // Handle
 	3, 7, 8                                   // Base (Triangle at the bottom)
 };
 
@@ -111,7 +111,7 @@ GLfloat enemy1_vertices[] = {
      0.10f,  0.25f, 0.0f,  // 5: Top-right
      0.00f,  0.10f, 0.0f,  // 6: Bottom point (connected to body)
 
-     // ---------------- TOP HAT (Tiny square on top of head) -
+     // ---------------- HAT (Trapez) -
 
       0.02f,  0.25f, 0.0f,  // 7: Bottom-left
       0.08f,  0.25f, 0.0f,  // 8: Bottom-right
@@ -130,16 +130,16 @@ GLfloat enemy1_vertices[] = {
        0.10f,  0.07f, 0.0f,  // 17: Top-right
        0.13f,  0.07f, 0.0f,  // 18: Top-left (on Torso)
 
-       // ---------------- TAIL (Slanted triangle pointing down-right)
+       // ---------------- TAIL (Triangle pointing down-right)
        -0.10f, -0.10f, 0.0f,  // 19: Top-left
-        0.10f, -0.10f, 0.0f,  // 20: Top-right (alignment)
-        0.10f, -0.40f, 0.0f   // 21: Sharp bottom tip
+        0.10f, -0.10f, 0.0f,  // 20: Top-right 
+        0.10f, -0.40f, 0.0f   // 21: Bottom tip
 };
 
 GLuint enemy1_indices[] = {
     0, 1, 2,     0, 2, 3,       // Torso (Length 6, Starts 0)
-    4, 6, 5,                    // Inverted Head (Length 3, Starts 6)
-    7, 8, 9,     7, 9, 10,      // Top tiny hat (Length 6, Starts 9)
+    4, 6, 5,                    // Head (Length 3, Starts 6)
+    7, 8, 9,     7, 9, 10,      // Hat (Length 6, Starts 9)
     11, 12, 13,  11, 13, 14,    // Left Arm (Length 6, Starts 15)
     16, 15, 18,  16, 18, 17,    // Right Arm (Length 6, Starts 21)
     19, 21, 20                  // Tail (Length 3, Starts 27)
@@ -162,10 +162,10 @@ GLfloat enemy2_vertices[] = {
      0.08f,  0.10f, 0.0f,  // 8: Bottom-right
      0.055f, 0.22f, 0.0f,  // 9: Sharp Top Tip
 
-     // ---------------- TAIL (Slanted triangle pointing down-right)
+     // ---------------- TAIL (Triangle pointing down-right)
      -0.10f, -0.10f, 0.0f,  // 10: Top-left
-      0.10f, -0.10f, 0.0f,  // 11: Top-right (alignment)
-      0.10f, -0.35f, 0.0f   // 12: Sharp bottom tip
+      0.10f, -0.10f, 0.0f,  // 11: Top-right
+      0.10f, -0.35f, 0.0f   // 12: Bottom tip
 };
 
 GLuint enemy2_indices[] = {
