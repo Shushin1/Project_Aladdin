@@ -1,6 +1,8 @@
 # Aladdin: Escape from Agrabah
 
-![Game Poster](game_cover.jpeg)
+<p align="center">
+  <img src="game_cover.jpeg" alt="Aladdin: Escape from Agrabah" width="350">
+</p>
 
 ## 📜 The Story
 
